@@ -21,9 +21,10 @@ function generateContentSecurityPolicy(nonce: string): string {
   return [
     `default-src 'none'`,
     `base-uri 'self'`,
-    `connect-src 'self'` + (isDevelopment && ` ws://localhost:8002`),
+    `connect-src 'self'` + (isDevelopment ? ` ws://localhost:8002` : ''),
     `font-src 'self' fonts.gstatic.com canada.ca www.canada.ca`,
     `form-action 'self'`,
+    `frame-ancestors 'none'`,
     `img-src 'self' canada.ca www.canada.ca`,
     `script-src 'self' 'nonce-${nonce}'`,
     `style-src 'self' canada.ca www.canada.ca`,
@@ -32,6 +33,14 @@ function generateContentSecurityPolicy(nonce: string): string {
 
 
 async function handleRequest(request: Request, responseStatusCode: number, responseHeaders: Headers, remixContext: EntryContext) {
+  const handlerFnName = isbot(request.headers.get('user-agent')) ? 'onAllReady' : 'onShellReady';
+  const nonce = crypto.randomBytes(32).toString('hex');
+
+  responseHeaders.set('Content-Security-Policy', generateContentSecurityPolicy(nonce));
+  responseHeaders.set('Content-Type', 'text/html');
+  responseHeaders.set('X-Content-Type-Options', 'nosniff');
+  responseHeaders.set('X-Frame-Options', 'sameorigin');
+
   await createInstance()
     .use(initReactI18next)
     .use(I18NexFsBackend)
@@ -44,14 +53,6 @@ async function handleRequest(request: Request, responseStatusCode: number, respo
       ns: getNamespaces(remixContext.routeModules),
       supportedLngs: ['en', 'fr'],
     });
-
-  const handlerFnName = isbot(request.headers.get('user-agent')) ? 'onAllReady' : 'onShellReady';
-  const nonce = crypto.randomBytes(32).toString('hex');
-
-  responseHeaders.set('Content-Security-Policy', generateContentSecurityPolicy(nonce));
-  responseHeaders.set('Content-Type', 'text/html');
-  responseHeaders.set('X-Content-Type-Options', 'nosniff');
-  responseHeaders.set('X-Frame-Options', 'sameorigin');
 
   return new Promise((resolve, reject) => {
 
