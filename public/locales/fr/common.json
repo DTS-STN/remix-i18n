@@ -1,0 +1,5 @@
+{
+  "app-title": "La démo de Remix i18n",
+  "language": "Français",
+  "message": "Langue actuelle\u00a0: {{language}}"
+}

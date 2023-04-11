@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-cover { background-image: url(https://canada.ca/content/dam/canada/homepage-bg/bkg-home-banner-spring-1200.jpg) }
