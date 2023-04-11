@@ -1,0 +1,9 @@
+{
+  "index": {
+    "page-title": "Developers"
+  },
+  "view": {
+    "page-title": "{{name}}",
+    "rating": "Rating: {{rating}}"
+  }
+}
