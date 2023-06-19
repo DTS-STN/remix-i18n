@@ -27,7 +27,7 @@ const App: FC = () => {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
-        <noscript><link rel="stylesheet" href="/etc/designs/canada/wet-boew/css/noscript.min.css"/></noscript>
+        <noscript><link rel="stylesheet" href="https://canada.ca/etc/designs/canada/wet-boew/css/noscript.min.css"/></noscript>
       </head>
       <body>
         <Outlet />
