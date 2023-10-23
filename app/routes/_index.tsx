@@ -1,4 +1,4 @@
-import type { V2_MetaFunction } from '@remix-run/react';
+import type { MetaFunction } from '@remix-run/react';
 import { Link, useLoaderData } from '@remix-run/react';
 import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
 import { json } from '@remix-run/server-runtime';
@@ -15,7 +15,7 @@ export const loader: LoaderFunction = () => {
   return json({ backgroundNumber: Math.floor(Math.random() * 5) });
 };
 
-export const meta: V2_MetaFunction = ({ data }) => [
+export const meta: MetaFunction = ({ data }) => [
   { title: 'The Remix i18n demo / La démo de Remix i18n' },
 ];
 

@@ -9,28 +9,28 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@remix-run/node": "~1.17.0",
-    "@remix-run/react": "~1.17.0",
-    "@remix-run/serve": "~1.17.0",
-    "i18next": "~23.1.0",
-    "i18next-browser-languagedetector": "~7.0.0",
-    "i18next-fs-backend": "~2.1.0",
-    "i18next-http-backend": "~2.2.0",
-    "isbot": "~3.6.0",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-i18next": "~13.0.0"
+    "@remix-run/node": "^2.1.0",
+    "@remix-run/react": "^2.1.0",
+    "@remix-run/serve": "^2.1.0",
+    "i18next": "^23.6.0",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "i18next-fs-backend": "^2.2.0",
+    "i18next-http-backend": "^2.2.2",
+    "isbot": "^3.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^13.3.1"
   },
   "devDependencies": {
-    "@remix-run/dev": "~1.17.0",
-    "@remix-run/eslint-config": "~1.17.0",
-    "@types/react": "~18.2.0",
-    "@types/react-dom": "~18.2.0",
-    "eslint": "~8.43.0",
-    "eslint-config-prettier": "~8.8.0",
-    "prettier-plugin-tailwindcss": "~0.3.0",
-    "tailwindcss": "~3.3.0",
-    "typescript": "~5.1.0"
+    "@remix-run/dev": "^2.1.0",
+    "@remix-run/eslint-config": "^2.1.0",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "extends": [

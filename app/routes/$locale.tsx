@@ -1,6 +1,6 @@
 import type { LinksFunction, LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import type { V2_MetaFunction } from '@remix-run/react';
+import type { MetaFunction } from '@remix-run/react';
 import { Link, Outlet } from '@remix-run/react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +31,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json({ pageTitle: t('app-title') });
 };
 
-export const meta: V2_MetaFunction = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [{ title: data.pageTitle }];
 };
 

@@ -1,5 +1,4 @@
-import type { EntryContext } from '@remix-run/node';
-import { Response } from '@remix-run/node';
+import { createReadableStreamFromReadable, type EntryContext } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import crypto from 'crypto';
 import { createInstance } from 'i18next';
@@ -63,7 +62,8 @@ async function handleRequest(request: Request, responseStatusCode: number, respo
       {
         [handlerFnName]() {
           const body = new PassThrough();
-          resolve(new Response(body, { headers: responseHeaders, status: responseStatusCode }));
+          const stream = createReadableStreamFromReadable(body);
+          resolve(new Response(stream, { headers: responseHeaders, status: responseStatusCode }));
           pipe(body);
         },
         onShellError(error: unknown) {
