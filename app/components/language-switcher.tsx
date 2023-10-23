@@ -1,6 +1,4 @@
-import type { LinkProps } from '@remix-run/react';
-import { Link, useLocation } from '@remix-run/react';
-import type { FC } from 'react';
+import { Link, useLocation, type LinkProps } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -10,11 +8,8 @@ export type LanguageSwitcherProps = Omit<LinkProps, 'to'>;
 
 /**
  * A component that renders a link to switch between languages.
- *
- * @param {LanguageSwitcherProps} props - The props for the LanguageSwitcher component.
- * @returns {JSX.Element} - A link component that switches between languages when clicked.
  */
-const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ ...props }) => {
+export const LanguageSwitcher = ({ ...props }: LanguageSwitcherProps) => {
   const { pathname } = useLocation();
   const { i18n, t } = useTranslation('wet-boew');
 
@@ -28,5 +23,3 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ ...props }) => {
     </Link>
   );
 };
-
-export default LanguageSwitcher;

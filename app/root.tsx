@@ -6,7 +6,7 @@ import { useContext } from 'react';
 
 import tailwind from '~/tailwind.css';
 import { getLocale } from '~/utils/locale-utils';
-import NonceContext from './components/nonce-context';
+import { NonceContext } from './components/nonce-context';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind }

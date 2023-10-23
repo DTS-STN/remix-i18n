@@ -9,7 +9,7 @@ import { renderToPipeableStream } from 'react-dom/server';
 import { initReactI18next } from 'react-i18next';
 import { PassThrough } from 'stream';
 
-import NonceContext from '~/components/nonce-context';
+import { NonceContext } from '~/components/nonce-context';
 import { getLocale, getNamespaces } from '~/utils/locale-utils';
 
 const ABORT_DELAY = 5000;

@@ -1,5 +1,4 @@
-import type { Namespace, TFunction } from 'i18next';
-import { createInstance } from 'i18next';
+import { createInstance, type Namespace, type TFunction } from 'i18next';
 import I18NexFsBackend from 'i18next-fs-backend';
 import { resolve } from 'node:path';
 
@@ -12,7 +11,7 @@ import { getLocale } from '~/utils/locale-utils';
  * @param {Namespace} namespaces - The namespace object (a string, array of strings, or null).
  * @returns {Promise<TFunction<Namespace>>} - A promise that resolves to a translation function for the given namespace.
  */
-export async function getFixedT<N extends Namespace>(request: Request, namespaces: N): Promise<TFunction<N>> {
+export const getFixedT = async <N extends Namespace>(request: Request, namespaces: N): Promise<TFunction<N>> => {
   const i18n = createInstance();
 
   await i18n
@@ -26,4 +25,4 @@ export async function getFixedT<N extends Namespace>(request: Request, namespace
     });
 
   return i18n.getFixedT(null, null);
-}
+};

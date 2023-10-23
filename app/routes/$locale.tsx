@@ -1,11 +1,8 @@
-import type { LinksFunction, LoaderFunction } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import type { MetaFunction } from '@remix-run/react';
-import { Link, Outlet } from '@remix-run/react';
-import type { FC } from 'react';
+import { json, type LinksFunction, type LoaderFunction } from '@remix-run/node';
+import { Link, Outlet, type MetaFunction } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
 
-import LanguageSwitcher from '~/components/language-switcher';
+import { LanguageSwitcher } from '~/components/language-switcher';
 import { getLocale } from '~/utils/locale-utils';
 import { getFixedT } from '~/utils/locale-utils.server';
 
@@ -35,7 +32,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [{ title: data.pageTitle }];
 };
 
-const GlobalHeader: FC = () => {
+const GlobalHeader = () => {
   const { i18n, t } = useTranslation('wet-boew');
 
   return (
@@ -71,9 +68,9 @@ const GlobalHeader: FC = () => {
             </section>
             <div className="brand col-xs-9 col-sm-5 col-md-4" property="publisher" resource="#wb-publisher" typeof="GovernmentOrganization">
               <link href={`https://canada.ca/content/canadasite/${i18n.language}.html`} property="url" />
-              <img src={`https://canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-${i18n.language}.svg`} alt={t('government-of-canada')!} property="logo" />
+              <img src={`https://canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-${i18n.language}.svg`} alt={t('government-of-canada')} property="logo" />
               <span className="wb-inv">/ <span lang={i18n.language === 'fr' ? 'en' : 'fr'}>{t('alt-government-of-canada')}</span></span>
-              <meta property="name" content={t('government-of-canada')!} />
+              <meta property="name" content={t('government-of-canada')} />
               <meta property="areaServed" typeof="Country" content="Canada" />
               <link property="logo" href="https://canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg" />
             </div>
@@ -84,7 +81,7 @@ const GlobalHeader: FC = () => {
   );
 };
 
-const $locale: FC = () => {
+export default () => {
   const { t } = useTranslation('common');
 
   return (
@@ -108,5 +105,3 @@ const $locale: FC = () => {
     </>
   );
 };
-
-export default $locale;

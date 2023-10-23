@@ -1,8 +1,6 @@
 import type { MetaFunction } from '@remix-run/react';
 import { Link, useLoaderData } from '@remix-run/react';
-import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
-import { json } from '@remix-run/server-runtime';
-import type { FC } from 'react';
+import { json, type LinksFunction, type LoaderFunction } from '@remix-run/server-runtime';
 
 export const links: LinksFunction = () => [
   { rel: 'apple-touch-icon', href: 'https://canada.ca/etc/designs/canada/wet-boew/assets/favicon-mobile.png', sizes: '57x57 72x72 114x114 144x144 150x150' },
@@ -15,27 +13,34 @@ export const loader: LoaderFunction = () => {
   return json({ backgroundNumber: Math.floor(Math.random() * 5) });
 };
 
-export const meta: MetaFunction = ({ data }) => [
+export const meta: MetaFunction = () => [
   { title: 'The Remix i18n demo / La démo de Remix i18n' },
 ];
 
-const RandomBackground: FC = () => {
+const RandomBackground = () => {
   const { backgroundNumber } = useLoaderData<typeof loader>();
 
   return (
     <div id="bg">
       {[
-        <img key="0" src="https://canada.ca/content/dam/canada/splash/sp-bg-1.jpg" alt="" />,
-        <img key="1" src="https://canada.ca/content/dam/canada/splash/sp-bg-2.jpg" alt="" />,
-        <img key="2" src="https://canada.ca/content/dam/canada/splash/sp-bg-3.jpg" alt="" />,
-        <img key="3" src="https://canada.ca/content/dam/canada/splash/sp-bg-4.jpg" alt="" />,
-        <img key="4" src="https://canada.ca/content/dam/canada/splash/sp-bg-5.jpg" alt="" />,
+        <img key="1" src="https://canada.ca/content/dam/canada/splash/sp-bg-1.jpg" alt="" />,
+        <img key="2" src="https://canada.ca/content/dam/canada/splash/sp-bg-2.jpg" alt="" />,
+        <img key="3" src="https://canada.ca/content/dam/canada/splash/sp-bg-3.jpg" alt="" />,
+        <img key="4" src="https://canada.ca/content/dam/canada/splash/sp-bg-4.jpg" alt="" />,
+        <img key="5" src="https://canada.ca/content/dam/canada/splash/sp-bg-5.jpg" alt="" />,
+        <img key="6" src="https://canada.ca/content/dam/canada/splash/sp-bg-6.jpg" alt="" />,
+        <img key="7" src="https://canada.ca/content/dam/canada/splash/sp-bg-7.jpg" alt="" />,
+        <img key="8" src="https://canada.ca/content/dam/canada/splash/sp-bg-8.jpg" alt="" />,
+        <img key="9" src="https://canada.ca/content/dam/canada/splash/sp-bg-9.jpg" alt="" />,
+        <img key="10" src="https://canada.ca/content/dam/canada/splash/sp-bg-10.jpg" alt="" />,
+        <img key="11" src="https://canada.ca/content/dam/canada/splash/sp-bg-11.jpg" alt="" />,
+        <img key="12" src="https://canada.ca/content/dam/canada/splash/sp-bg-12.jpg" alt="" />,
       ][backgroundNumber]}
     </div>
   );
 };
 
-const Index: FC = () => {
+export default () => {
   return (
     <div className="splash">
       <RandomBackground />
@@ -89,5 +94,3 @@ const Index: FC = () => {
     </div>
   );
 };
-
-export default Index;

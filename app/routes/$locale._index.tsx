@@ -1,13 +1,12 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import AppLink from '~/components/app-link';
+import { AppLink } from '~/components/app-link';
 
 export const handle = {
   i18nNamespaces: ['test'],
 };
 
-const Index: FC = () => {
+export default () => {
   const { t } = useTranslation('test');
 
   return (
@@ -18,5 +17,3 @@ const Index: FC = () => {
     </section>
   );
 };
-
-export default Index;
