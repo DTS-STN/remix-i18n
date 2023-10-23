@@ -57,7 +57,7 @@ docker run --rm --publish 3000:3000 registry.localtest.me/remix-i18n
     return json({ pageTitle: t('app-title') });
   };
 
-  export const meta: V2_MetaFunction = ({ data }) => [
+  export const meta: MetaFunction<typeof loader> = ({ data }) => [
     { title: data.pageTitle },
   ];
   ```
