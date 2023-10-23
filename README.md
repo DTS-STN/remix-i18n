@@ -33,7 +33,7 @@ npm start
 The easiest way to build a container image is to use [Cloud Native Buildpacks](https://buildpacks.io/):
 
 ``` sh
-pack build registry.localtest.me/remix-i18n --builder paketobuildpacks/builder:full --env NODE_ENV=production
+pack build registry.localtest.me/remix-i18n --builder paketobuildpacks/builder:full --env BP_NODE_VERSION=18.16.1 --env NODE_ENV=production
 docker run --rm --publish 3000:3000 registry.localtest.me/remix-i18n
 ```
 
