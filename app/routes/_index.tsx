@@ -10,7 +10,7 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = () => {
-  return json({ backgroundNumber: Math.floor(Math.random() * 5) });
+  return json({ backgroundNumber: Math.floor(Math.random() * 12) });
 };
 
 export const meta: MetaFunction = () => [
