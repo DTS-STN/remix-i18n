@@ -1,4 +1,4 @@
-import { json, type LinksFunction, type LoaderFunction } from '@remix-run/node';
+import { json, type LinksFunction, type LoaderFunctionArgs } from '@remix-run/node';
 import { Link, Outlet, type MetaFunction } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,7 +16,7 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: 'https://canada.ca/etc/designs/canada/wet-boew/css/theme.min.css' },
 ];
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const locale = getLocale(request.url);
   const { pathname } = new URL(request.url);
 
@@ -29,10 +29,10 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  return [{ title: data.pageTitle }];
+  return [{ title: data?.pageTitle }];
 };
 
-const GlobalHeader = () => {
+function GlobalHeader() {
   const { i18n, t } = useTranslation('wet-boew');
 
   return (
@@ -79,9 +79,9 @@ const GlobalHeader = () => {
       </header>
     </div>
   );
-};
+}
 
-export default () => {
+export default function () {
   const { t } = useTranslation('common');
 
   return (

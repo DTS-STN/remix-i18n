@@ -9,7 +9,7 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 
 import { getNamespaces } from '~/utils/locale-utils';
 
-const hydrate = () => {
+function hydrate() {
   startTransition(() => {
     hydrateRoot(
       document,

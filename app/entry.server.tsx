@@ -14,7 +14,7 @@ import { getLocale, getNamespaces } from '~/utils/locale-utils';
 
 const ABORT_DELAY = 5000;
 
-function generateContentSecurityPolicy(nonce: string): string {
+function generateContentSecurityPolicy(nonce: string) {
   const isDevelopment = process.env.NODE_ENV === 'development';
 
   return [
@@ -30,8 +30,7 @@ function generateContentSecurityPolicy(nonce: string): string {
   ].join('; ');
 }
 
-
-async function handleRequest(request: Request, responseStatusCode: number, responseHeaders: Headers, remixContext: EntryContext) {
+export default async function (request: Request, responseStatusCode: number, responseHeaders: Headers, remixContext: EntryContext) {
   const handlerFnName = isbot(request.headers.get('user-agent')) ? 'onAllReady' : 'onShellReady';
   const nonce = crypto.randomBytes(32).toString('hex');
 
@@ -54,7 +53,6 @@ async function handleRequest(request: Request, responseStatusCode: number, respo
     });
 
   return new Promise((resolve, reject) => {
-
     const { pipe, abort } = renderToPipeableStream(
       <NonceContext.Provider value={{ nonce }}>
         <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />
@@ -79,5 +77,3 @@ async function handleRequest(request: Request, responseStatusCode: number, respo
     setTimeout(abort, ABORT_DELAY);
   });
 }
-
-export default handleRequest;

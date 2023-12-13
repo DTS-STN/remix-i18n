@@ -6,7 +6,7 @@ export const handle = {
   i18nNamespaces: ['test'],
 };
 
-export default () => {
+export default function () {
   const { t } = useTranslation('test');
 
   return (

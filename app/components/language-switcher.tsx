@@ -9,7 +9,7 @@ export type LanguageSwitcherProps = Omit<LinkProps, 'to'>;
 /**
  * A component that renders a link to switch between languages.
  */
-export const LanguageSwitcher = ({ ...props }: LanguageSwitcherProps) => {
+export function LanguageSwitcher({ ...props }: LanguageSwitcherProps) {
   const { pathname } = useLocation();
   const { i18n, t } = useTranslation('wet-boew');
 
@@ -22,4 +22,4 @@ export const LanguageSwitcher = ({ ...props }: LanguageSwitcherProps) => {
       <abbr title="Français" className="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">{t('alt-lang-abbr')}</abbr>
     </Link>
   );
-};
+}

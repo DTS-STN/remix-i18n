@@ -1,6 +1,6 @@
 import type { MetaFunction } from '@remix-run/react';
 import { Link, useLoaderData } from '@remix-run/react';
-import { json, type LinksFunction, type LoaderFunction } from '@remix-run/server-runtime';
+import { json, type LinksFunction, type LoaderFunctionArgs } from '@remix-run/server-runtime';
 
 export const links: LinksFunction = () => [
   { rel: 'apple-touch-icon', href: 'https://canada.ca/etc/designs/canada/wet-boew/assets/favicon-mobile.png', sizes: '57x57 72x72 114x114 144x144 150x150' },
@@ -9,7 +9,7 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: 'https://canada.ca/etc/designs/canada/wet-boew/css/messages.min.css' },
 ];
 
-export const loader: LoaderFunction = () => {
+export const loader = ({ request }: LoaderFunctionArgs) => {
   return json({ backgroundNumber: Math.floor(Math.random() * 12) });
 };
 
@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => [
   { title: 'The Remix i18n demo / La démo de Remix i18n' },
 ];
 
-const RandomBackground = () => {
+function RandomBackground() {
   const { backgroundNumber } = useLoaderData<typeof loader>();
 
   return (
@@ -38,9 +38,9 @@ const RandomBackground = () => {
       ][backgroundNumber]}
     </div>
   );
-};
+}
 
-export default () => {
+export default function () {
   return (
     <div className="splash">
       <RandomBackground />

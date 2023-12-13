@@ -9,7 +9,7 @@ export type AppLinkProps = { locale?: 'en' | 'fr' } & LinkProps;
 /**
  * A component that renders a localized link.
  */
-export const AppLink = ({ locale, ...props }: AppLinkProps) => {
+export function AppLink({ locale, ...props }: AppLinkProps) {
   const { i18n } = useTranslation();
 
   const targetLocale = locale ?? i18n.language;
@@ -20,4 +20,4 @@ export const AppLink = ({ locale, ...props }: AppLinkProps) => {
       {props.children}
     </Link>
   );
-};
+}

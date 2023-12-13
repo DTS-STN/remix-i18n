@@ -1,7 +1,6 @@
-import type { LinksFunction, LoaderFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react';
-import type { FC } from 'react';
 import { useContext } from 'react';
 
 import tailwind from '~/tailwind.css';
@@ -12,11 +11,11 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwind }
 ];
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = ({ request }: LoaderFunctionArgs) => {
   return json({ locale: getLocale(request.url) });
 };
 
-const App: FC = () => {
+export default function () {
   const { nonce } = useContext(NonceContext);
   const { locale } = useLoaderData<typeof loader>();
 
@@ -38,5 +37,3 @@ const App: FC = () => {
     </html>
   );
 }
-
-export default App;
