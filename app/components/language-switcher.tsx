@@ -17,7 +17,7 @@ export const LanguageSwitcher = ({ ...props }: LanguageSwitcherProps) => {
   const linkPath = pathname.replace(i18n.language, altLang);
 
   return (
-    <Link {...props} to={linkPath} reloadDocument>
+    <Link {...props} to={linkPath} onClick={() => i18n.changeLanguage(altLang)}>
       <span className="hidden-xs">{t('alt-lang')}</span>
       <abbr title="Français" className="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">{t('alt-lang-abbr')}</abbr>
     </Link>
