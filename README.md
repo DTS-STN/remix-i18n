@@ -4,6 +4,18 @@ A [Remix](https://remix.run/) application demonstrating path-based localization 
 
 - [Remix Docs](https://remix.run/docs)
 
+## ⚠️ IMPORTANT NOTE ⚠️
+
+This project was created in April 2023 as a means to explore how the
+[Remix](https://remix.run/) framework integrates with various i18n solutions.
+Since then, Remix has been used to build the [**Canadian Dental Care
+Plan**](https://github.com/DTS-STN/canadian-dental-care-plan) application, which
+contains a more robust and fully-featured i18n solution.
+
+While this project still has some value as a barebones reference, it is no
+longer actively maintained. Please refer to the CDCP application for the most
+up-to-date i18n reference.
+
 ## Development
 
 From your terminal:
