@@ -1,4 +1,3 @@
-import { useHref } from '@remix-run/react';
 import { createRemixStub } from '@remix-run/testing';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { useTranslation } from 'react-i18next';
