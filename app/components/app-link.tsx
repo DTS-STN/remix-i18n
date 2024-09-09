@@ -1,19 +1,22 @@
-import { Link, type LinkProps } from '@remix-run/react';
+import { Link, useHref, type LinkProps } from '@remix-run/react';
+import { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Language } from '~/modules/i18n';
 
 /**
  * Props for the AppLink component.
  */
-export type AppLinkProps = { locale?: 'en' | 'fr' } & LinkProps;
+type AppLinkProps = { language?: Language } & ComponentProps<typeof Link>;
 
 /**
  * A component that renders a localized link.
  */
-export function AppLink({ locale, ...props }: AppLinkProps) {
+export function AppLink({ language, to, ...props }: AppLinkProps) {
+  const href = useHref(to);
   const { i18n } = useTranslation();
 
-  const targetLocale = locale ?? i18n.language;
-  const path = `/${targetLocale}${props.to}`;
+  const targetLanguage = language ?? i18n.language;
+  const path = `/${targetLanguage}${href}`;
 
   return (
     <Link {...props} to={path}>

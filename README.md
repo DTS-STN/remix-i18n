@@ -4,18 +4,6 @@ A [Remix](https://remix.run/) application demonstrating path-based localization 
 
 - [Remix Docs](https://remix.run/docs)
 
-## ⚠️ IMPORTANT NOTE ⚠️
-
-This project was created in April 2023 as a means to explore how the
-[Remix](https://remix.run/) framework integrates with various i18n solutions.
-Since then, Remix has been used to build the [**Canadian Dental Care
-Plan**](https://github.com/DTS-STN/canadian-dental-care-plan) application, which
-contains a more robust and fully-featured i18n solution.
-
-While this project still has some value as a barebones reference, it is no
-longer actively maintained. Please refer to the CDCP application for the most
-up-to-date i18n reference.
-
 ## Development
 
 From your terminal:
@@ -42,11 +30,16 @@ npm start
 
 ## Build container image
 
-The easiest way to build a container image is to use [Cloud Native Buildpacks](https://buildpacks.io/):
+The easiest way to build a container image is to use the following commands:
 
 ``` sh
-pack build registry.localtest.me/remix-i18n --builder paketobuildpacks/builder:full --env BP_NODE_VERSION=18.16.1 --env NODE_ENV=production
-docker run --rm --publish 3000:3000 registry.localtest.me/remix-i18n
+docker build . --file containerfile --tag remix-i18n             \
+    --build-arg BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"      \
+    --build-arg BUILD_ID="0001"                                  \
+    --build-arg BUILD_REVISION="$(git rev-parse --short=8 HEAD)" \
+    --build-arg BUILD_VERSION="1.0.0"
+docker inspect remix-i18n
+docker run --init --interactive --tty --rm --publish 3000:3000 --name remix-i18n remix-i18n
 ```
 
 ## Tips and tricks
@@ -56,8 +49,8 @@ docker run --rm --publish 3000:3000 registry.localtest.me/remix-i18n
 
   ``` typescript
   export const handle = {
-    i18nNamespaces: ['common'],
-  };
+    i18nNamespaces: ['common'] as const,
+  } satisfies RouteHandle;
   ```
 
 - **Translating page metadata (ie: `<title>`):** to translate page metadata, expose the translated string via a Remix
@@ -65,13 +58,14 @@ docker run --rm --publish 3000:3000 registry.localtest.me/remix-i18n
 
   ``` typescript
   export const loader: LoaderFunction = async ({ request }) => {
-    const t = await getFixedT(request, 'common');
-    return json({ pageTitle: t('app-title') });
+    const language = getLang(request);
+    const t = await getFixedT(request, handle.i18nNamespaces);
+    return json({ pageTitle: t('application:page-title') });
   };
 
   export const meta: MetaFunction<typeof loader> = ({ data }) => [
     { title: data.pageTitle },
-  ];
+  ] as const;
   ```
 
 ## Credits

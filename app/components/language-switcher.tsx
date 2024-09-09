@@ -1,25 +1,41 @@
-import { Link, useLocation, type LinkProps } from '@remix-run/react';
-import { useTranslation } from 'react-i18next';
+import { Link, useMatches, useParams, useSearchParams } from '@remix-run/react';
+import { ComponentProps } from 'react';
+import invariant from 'tiny-invariant';
+import { getAltLanguage, isLanguage } from '~/modules/i18n';
 
 /**
- * Props for the LanguageSwitcher component.
+ * Props for the LanguageSwitcher component. Omits the `to` and `reloadDocument`
+ * props from the `Link` component since those values are derived from the
+ * current route.
  */
-export type LanguageSwitcherProps = Omit<LinkProps, 'to'>;
+type LanguageSwitcherProps = Omit<
+  ComponentProps<typeof Link>,
+  'to' | 'reloadDocument'
+>;
 
 /**
- * A component that renders a link to switch between languages.
+ * Component that can be used to switch from one language to another.
+ * (ie: 'en' → 'fr'; 'fr' → 'en')
  */
-export function LanguageSwitcher({ ...props }: LanguageSwitcherProps) {
-  const { pathname } = useLocation();
-  const { i18n, t } = useTranslation('wet-boew');
+export function LanguageSwitcher({
+  children,
+  ...props
+}: LanguageSwitcherProps) {
+  const matches = useMatches();
+  const [searchParams] = useSearchParams();
 
-  const altLang = i18n.language === 'fr' ? 'en' : 'fr';
-  const linkPath = pathname.replace(i18n.language, altLang);
+  const { lang } = useParams();
+  invariant(isLanguage(lang));
+
+  const altLanguage = getAltLanguage(lang);
+  const currentRoute = matches[matches.length - 1];
+
+  const pathname = currentRoute.pathname.replace(lang, altLanguage);
+  const search = searchParams.toString();
 
   return (
-    <Link {...props} to={linkPath} onClick={() => i18n.changeLanguage(altLang)}>
-      <span className="hidden-xs">{t('alt-lang')}</span>
-      <abbr title="Français" className="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">{t('alt-lang-abbr')}</abbr>
+    <Link reloadDocument to={{ pathname, search }} {...props}>
+      {children}
     </Link>
   );
 }

@@ -1,8 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/linux,osx,windows,dotenv,node,remix,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=linux,osx,windows,dotenv,node,remix,visualstudiocode
-
-### dotenv ###
-.env
+# Created by https://www.toptal.com/developers/gitignore/api/linux,osx,windows,node,remix,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=linux,osx,windows,node,remix,visualstudiocode
 
 ### Linux ###
 *~
@@ -95,6 +92,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -238,4 +236,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/linux,osx,windows,dotenv,node,remix,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/linux,osx,windows,node,remix,visualstudiocode
