@@ -14,6 +14,11 @@ import {
   getLoadPath,
 } from '~/modules/i18n.server';
 
+vi.mock('~/modules/i18n.client', async (importOriginal) => {
+  vi.stubGlobal('env', { DEBUG_I18N_CLIENT: false });
+  return await importOriginal();
+});
+
 vi.mock('i18next', () => {
   const i18next = {
     getFixedT: vi.fn(),
@@ -29,6 +34,7 @@ vi.mock('i18next', () => {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.unstubAllGlobals();
 });
 
 describe('getFixedT', () => {
@@ -182,6 +188,7 @@ describe('createClientInstance', () => {
       backend: {
         loadPath: '/locales/{{ns}}-{{lng}}.json',
       },
+      debug: false,
       defaultNS: false,
       fallbackLng: false,
       keySeparator: false,
@@ -217,6 +224,7 @@ describe('createServerInstance', () => {
       backend: {
         loadPath: resolve('./public/locales/{{ns}}-{{lng}}.json'),
       },
+      debug: false,
       defaultNS: false,
       fallbackLng: false,
       interpolation: {

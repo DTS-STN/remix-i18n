@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs } from '@remix-run/node';
 import {
+  json,
   Links,
   Meta,
   Outlet,
@@ -15,8 +16,15 @@ export const handle = {
 } as const satisfies RouteHandle;
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  const { DEBUG_I18N_CLIENT } = process.env;
   const language = getLang(request);
-  return { language } as const;
+
+  return json({
+    env: {
+      DEBUG_I18N_CLIENT,
+    },
+    language,
+  });
 }
 
 function Header() {
@@ -53,6 +61,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <Header />
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.env = ${JSON.stringify(loaderData.env)}`,
+          }}
+        />
         <ScrollRestoration />
         <Scripts />
       </body>

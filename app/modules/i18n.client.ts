@@ -11,6 +11,10 @@ import I18NextHttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 import { getNamespaces } from '~/modules/i18n';
 
+// set to true to enable client-side i18next debug logging
+// ex: DEBUG_I18N_CLIENT=true npm run dev
+const { DEBUG_I18N_CLIENT } = window.env;
+
 /**
  * Create an i18next instance from the Remix route modules.
  *
@@ -29,6 +33,7 @@ export async function createInstance(routeModules: RouteModules) {
       backend: {
         loadPath: '/locales/{{ns}}-{{lng}}.json',
       },
+      debug: DEBUG_I18N_CLIENT === 'true',
       defaultNS: false,
       fallbackLng: false,
       keySeparator: false,

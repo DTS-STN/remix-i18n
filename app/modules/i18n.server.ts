@@ -15,6 +15,10 @@ import { resolve } from 'node:path';
 import { initReactI18next } from 'react-i18next';
 import { getNamespaces, Language } from '~/modules/i18n';
 
+// set to true to enable server-side i18next debug logging
+// ex: DEBUG_I18N_SERVER=true npm run dev
+const { DEBUG_I18N_SERVER } = process.env;
+
 /**
  * Create an i18next instance from the request and Remix route modules.
  *
@@ -25,7 +29,7 @@ export async function createInstance(
   request: Request,
   routeModules: RouteModules,
 ) {
-  const lang = getLang(request) ?? 'en';
+  const lang = getLang(request);
   const namespaces = getNamespaces(routeModules);
   return initInstance(lang, namespaces);
 }
@@ -36,7 +40,10 @@ export async function createInstance(
  * @param language - The language to use.
  * @param namespace - The namespaces to load.
  */
-export async function initInstance(language: Language, namespace: Namespace) {
+export async function initInstance(
+  language: Language | undefined,
+  namespace: Namespace | undefined,
+) {
   const i18next = createI18NextInstance();
   const i18nLoadPath = getLoadPath();
 
@@ -48,6 +55,7 @@ export async function initInstance(language: Language, namespace: Namespace) {
       backend: {
         loadPath: i18nLoadPath,
       },
+      debug: DEBUG_I18N_SERVER === 'true',
       defaultNS: false,
       fallbackLng: false,
       interpolation: {

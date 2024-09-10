@@ -1,5 +1,14 @@
 import { Namespace } from 'i18next';
 
+/**
+ * Client-side environment varibles (similar to server-side process.env).
+ *
+ * @see NodeJS.ProcessEnv
+ */
+interface WindowEnv {
+  [key: string]: string | undefined;
+}
+
 declare global {
   /**
    * A `RouteHandle` interface that includes the `i18nNamespaces` property.
@@ -12,5 +21,12 @@ declare global {
    */
   interface RouteHandle extends Record<string, unknown> {
     i18nNamespaces?: Namespace;
+  }
+
+  /**
+   * The window.env property returns an object containing the client-side environment.
+   */
+  interface Window {
+    env: WindowEnv;
   }
 }
