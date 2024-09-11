@@ -1,18 +1,21 @@
+import * as React from 'react';
+
 import { Link, useHref } from '@remix-run/react';
-import { ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Language } from '~/modules/i18n';
 
 /**
  * Props for the AppLink component.
  */
-type AppLinkProps = { language?: Language } & ComponentProps<typeof Link>;
+export interface AppLinkProps extends React.ComponentProps<typeof Link> {
+  language?: Language;
+}
 
 /**
  * A component that renders a localized link.
  *
- * This component extends Remix's <Link> component by allowing a language
- * prop to be passed in. If a language is not passed in, the component will
+ * This component extends Remix's `Link` component by allowing a `language`
+ * prop to be passed in. If a `language` is not passed in, the component will
  * instead use the detected language from i18next.
  *
  * @example
@@ -25,16 +28,20 @@ type AppLinkProps = { language?: Language } & ComponentProps<typeof Link>;
  * <AppLink to="/about" language="fr">À propos</AppLink>
  * // will render: <a href="/fr/about">À propos</a>
  */
-export function AppLink({ language, to, ...props }: AppLinkProps) {
-  const href = useHref(to);
-  const { i18n } = useTranslation();
+export const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
+  ({ children, language, to, ...props }, ref) => {
+    const href = useHref(to);
+    const { i18n } = useTranslation();
 
-  const lang = language ?? i18n.language;
-  const path = `/${lang}${href}`;
+    const lang = language ?? i18n.language;
+    const path = `/${lang}${href}`;
 
-  return (
-    <Link {...props} to={path}>
-      {props.children}
-    </Link>
-  );
-}
+    return (
+      <Link {...props} ref={ref} to={path}>
+        {children}
+      </Link>
+    );
+  },
+);
+
+AppLink.displayName = 'AppLink';

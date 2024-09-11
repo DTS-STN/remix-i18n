@@ -3,6 +3,9 @@ import { Link } from '@remix-run/react';
 import { Trans, useTranslation } from 'react-i18next';
 import invariant from 'tiny-invariant';
 import { LanguageSwitcher } from '~/components/language-switcher';
+import { Button } from '~/components/ui/button';
+import { TypographyH1 } from '~/components/ui/typography-h1';
+import { TypographyP } from '~/components/ui/typography-p';
 import { getFixedT, getLang } from '~/modules/i18n.server';
 
 export const handle = {
@@ -33,21 +36,21 @@ export default function Index() {
     <>
       <section className="bg-white">
         <div className="container mx-auto px-6 py-16 text-center">
-          <h1 className="text-4xl font-bold text-gray-800">
-            <a href="/">{t('application:page-title')}</a>
-          </h1>
-          <p className="mt-4 text-gray-600">
+          <TypographyH1>{t('application:page-title')}</TypographyH1>
+          <TypographyP>
             <Trans
               i18nKey="application:current-language"
               values={{ language: t('common:language') }}
             />
-          </p>
+          </TypographyP>
           <div className="mt-4 flex justify-center space-x-4">
-            <LanguageSwitcher className="btn-blue">
-              {t('application:switch-language')}
+            <LanguageSwitcher>
+              <Button size="lg">{t('application:switch-language')}</Button>
             </LanguageSwitcher>
-            <Link to="/" className="btn-red" reloadDocument={true}>
-              Back
+            <Link to="/" reloadDocument={true}>
+              <Button size="lg" variant="destructive">
+                Back
+              </Button>
             </Link>
           </div>
         </div>

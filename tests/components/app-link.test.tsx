@@ -1,8 +1,14 @@
-import { createRemixStub } from '@remix-run/testing';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { Link, useHref } from '@remix-run/react';
+import { render } from '@testing-library/react';
+import { i18n } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AppLink } from '~/components/app-link';
+
+vi.mock('@remix-run/react', () => ({
+  Link: vi.fn(),
+  useHref: vi.fn(),
+}));
 
 vi.mock('react-i18next', () => ({
   useTranslation: vi.fn(),
@@ -10,47 +16,45 @@ vi.mock('react-i18next', () => ({
 
 beforeEach(() => {
   vi.clearAllMocks();
-  cleanup();
 });
+
+// used to partially mock useTranslation()
+type UseTranslationResponse = ReturnType<typeof useTranslation>;
 
 describe('AppLink', () => {
   it('should render the correct link for current language', async () => {
-    type PartialUseTranslationFn = () => {
-      i18n: { language: string };
+    type PartialUseTranslation = () => {
+      // we only need to mock i18n.language
+      i18n: Pick<UseTranslationResponse['i18n'], 'language'>;
     };
 
-    vi.mocked<PartialUseTranslationFn>(useTranslation).mockReturnValue({
+    vi.mocked(Link).mockImplementation(({ children }) => <>{children}</>);
+    vi.mocked(useHref).mockReturnValue('/about');
+    vi.mocked<PartialUseTranslation>(useTranslation).mockReturnValue({
       i18n: { language: 'fr' },
     });
 
-    const RemixStub = createRemixStub([
-      {
-        Component: () => <AppLink to="/about">About</AppLink>,
-        path: '/',
-      },
-    ]);
+    const result = render(<AppLink to="/about">About</AppLink>);
 
-    render(<RemixStub />);
-
-    const element = await waitFor(() => screen.findByText('About'));
-    expect(element.getAttribute('href')).toBe('/fr/about');
+    expect(vi.mocked(Link)).toHaveBeenCalledWith(
+      expect.objectContaining({ children: 'About', to: '/fr/about' }),
+      expect.anything(),
+    );
   });
 
   it('should render the correct link for requested language', async () => {
-    const RemixStub = createRemixStub([
-      {
-        Component: () => (
-          <AppLink to="/about" language="fr">
-            About
-          </AppLink>
-        ),
-        path: '/',
-      },
-    ]);
+    vi.mocked(useHref).mockReturnValue('/about');
+    vi.mocked(Link).mockImplementation(({ children }) => <>{children}</>);
 
-    render(<RemixStub />);
+    render(
+      <AppLink to="/about" language="fr">
+        About
+      </AppLink>,
+    );
 
-    const element = await waitFor(() => screen.findByText('About'));
-    expect(element.getAttribute('href')).toBe('/fr/about');
+    expect(vi.mocked(Link)).toHaveBeenCalledWith(
+      expect.objectContaining({ children: 'About', to: '/fr/about' }),
+      expect.anything(),
+    );
   });
 });

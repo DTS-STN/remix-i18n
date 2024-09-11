@@ -9,6 +9,7 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import { getLang } from '~/modules/i18n.server';
+
 import './tailwind.css';
 
 export const handle = {
