@@ -2,7 +2,7 @@ import { vitePlugin as remix } from '@remix-run/dev';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { configDefaults } from 'vitest/config';
+import { configDefaults, coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig({
   plugins: [
@@ -21,7 +21,10 @@ export default defineConfig({
     port: 3000,
   },
   test: {
-    ...configDefaults,
+    coverage: {
+      exclude: ['**/build/**', ...coverageConfigDefaults.exclude],
+    },
     environment: 'jsdom',
+    exclude: ['**/build/**', ...configDefaults.exclude],
   },
 });
