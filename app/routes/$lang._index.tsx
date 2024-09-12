@@ -3,9 +3,9 @@ import { Link } from '@remix-run/react';
 import { Trans, useTranslation } from 'react-i18next';
 import invariant from 'tiny-invariant';
 import { LanguageSwitcher } from '~/components/language-switcher';
+import { TypographyH1 } from '~/components/typography-h1';
+import { TypographyP } from '~/components/typography-p';
 import { Button } from '~/components/ui/button';
-import { TypographyH1 } from '~/components/ui/typography-h1';
-import { TypographyP } from '~/components/ui/typography-p';
 import { getFixedT, getLang } from '~/modules/i18n.server';
 
 export const handle = {

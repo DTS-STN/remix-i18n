@@ -7,7 +7,7 @@ import { configDefaults, coverageConfigDefaults } from 'vitest/config';
 export default defineConfig({
   plugins: [
     process.env.NODE_ENV === 'test'
-      ? react()
+      ? react() // see https://github.com/remix-run/remix/issues/9871
       : remix({
           future: {
             v3_fetcherPersist: true,
@@ -22,7 +22,11 @@ export default defineConfig({
   },
   test: {
     coverage: {
-      exclude: ['**/build/**', ...coverageConfigDefaults.exclude],
+      exclude: [
+        '**/build/**',
+        '**/{postcss,tailwind}.config.*',
+        ...coverageConfigDefaults.exclude,
+      ],
     },
     environment: 'jsdom',
     exclude: ['**/build/**', ...configDefaults.exclude],

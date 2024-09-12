@@ -5,7 +5,7 @@ import I18NextHttpBackend from 'i18next-http-backend';
 import { resolve } from 'node:path';
 import { initReactI18next } from 'react-i18next';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { getNamespaces } from '~/modules/i18n';
+import { getAltLanguage, getNamespaces, isLanguage } from '~/modules/i18n';
 import { createInstance as createClientInstance } from '~/modules/i18n.client';
 import {
   createInstance as createServerInstance,
@@ -35,6 +35,29 @@ vi.mock('i18next', () => {
 beforeEach(() => {
   vi.clearAllMocks();
   vi.unstubAllGlobals();
+});
+
+describe('isLanguage', () => {
+  it('should return false when value is null or not a string', () => {
+    expect(isLanguage(null)).toBe(false);
+    expect(isLanguage(42)).toBe(false);
+  });
+
+  it('should return false when value is not en or fr', () => {
+    expect(isLanguage('cn')).toBe(false);
+  });
+
+  it('should return true when value is en or fr', () => {
+    expect(isLanguage('en')).toBe(true);
+    expect(isLanguage('fr')).toBe(true);
+  });
+});
+
+describe('getAltLanguage', () => {
+  it('should return the opposite language for en and fr', () => {
+    expect(getAltLanguage('en')).toBe('fr');
+    expect(getAltLanguage('fr')).toBe('en');
+  });
 });
 
 describe('getFixedT', () => {

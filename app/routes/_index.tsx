@@ -1,9 +1,8 @@
 import type { MetaFunction } from '@remix-run/node';
-import { Link } from '@remix-run/react';
 import { AppLink } from '~/components/app-link';
+import { TypographyH1 } from '~/components/typography-h1';
+import { TypographyP } from '~/components/typography-p';
 import { Button } from '~/components/ui/button';
-import { TypographyH1 } from '~/components/ui/typography-h1';
-import { TypographyP } from '~/components/ui/typography-p';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'My Remix App / Mon Application Remix' }] as const;

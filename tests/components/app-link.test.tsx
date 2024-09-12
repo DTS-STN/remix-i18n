@@ -1,6 +1,5 @@
 import { Link, useHref } from '@remix-run/react';
 import { render } from '@testing-library/react';
-import { i18n } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AppLink } from '~/components/app-link';
