@@ -7,12 +7,16 @@ import I18NextHttpBackend from 'i18next-http-backend';
 import { resolve } from 'node:path';
 import { initReactI18next } from 'react-i18next';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { getAltLanguage, getNamespaces, isLanguage } from '~/modules/i18n';
+import {
+  getAltLanguage,
+  getLang,
+  getNamespaces,
+  isLanguage,
+} from '~/modules/i18n';
 import { createInstance as createClientInstance } from '~/modules/i18n.client';
 import {
   createInstance as createServerInstance,
   getFixedT,
-  getLang,
   getLoadPath,
 } from '~/modules/i18n.server';
 
@@ -75,17 +79,17 @@ describe('getFixedT', () => {
 
 describe('getLang', () => {
   it('should return undefined if the pathname does not start with /en/ or /fr/', () => {
-    const lang = getLang(new Request('http://localhost/'));
+    const lang = getLang('/');
     expect(lang).toBeUndefined();
   });
 
   it('should return en if the pathname starts with /en/', () => {
-    const lang = getLang(new Request('http://localhost/en/about'));
+    const lang = getLang('/en/about');
     expect(lang).toBe('en');
   });
 
   it('should return fr if the pathname starts with /fr/', () => {
-    const lang = getLang(new Request('http://localhost/fr/about'));
+    const lang = getLang('/fr/about');
     expect(lang).toBe('fr');
   });
 });
@@ -214,9 +218,8 @@ describe('createClientInstance', () => {
         loadPath: '/locales/{{ns}}-{{lng}}.json',
       },
       debug: false,
-      defaultNS: false,
+      defaultNS: [],
       fallbackLng: false,
-      keySeparator: false,
       ns: ['namespace1', 'namespace2', 'namespace3'],
     });
   });
@@ -250,13 +253,12 @@ describe('createServerInstance', () => {
         loadPath: resolve('./public/locales/{{ns}}-{{lng}}.json'),
       },
       debug: false,
-      defaultNS: false,
+      defaultNS: [],
       fallbackLng: false,
       interpolation: {
         escapeValue: false,
       },
       lng: 'fr',
-      keySeparator: false,
       ns: ['namespace1', 'namespace2', 'namespace3'],
     });
   });

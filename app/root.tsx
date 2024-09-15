@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import { getLang } from '~/modules/i18n.server';
+import { getLang } from '~/modules/i18n';
 
 import './tailwind.css';
 
@@ -17,7 +17,7 @@ export const handle = {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { DEBUG_I18N_CLIENT } = process.env;
-  const language = getLang(request);
+  const language = getLang(new URL(request.url).pathname);
 
   return {
     env: {
@@ -25,26 +25,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
     },
     language,
   };
-}
-
-function Header() {
-  return (
-    <>
-      <header className="bg-white shadow">
-        <div className="container mx-auto px-6 py-3">
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-bold text-gray-800">
-              <img
-                src="/sig-blk-en.svg"
-                alt="Government of Canada"
-                width="283"
-              />
-            </div>
-          </div>
-        </div>
-      </header>
-    </>
-  );
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -59,7 +39,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Header />
         {children}
         <script
           dangerouslySetInnerHTML={{

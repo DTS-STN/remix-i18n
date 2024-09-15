@@ -13,7 +13,8 @@ import { createInstance as createI18NextInstance, Namespace } from 'i18next';
 import I18NexFsBackend from 'i18next-fs-backend';
 import { resolve } from 'node:path';
 import { initReactI18next } from 'react-i18next';
-import { getNamespaces, Language } from '~/modules/i18n';
+import { getLang, getNamespaces } from '~/modules/i18n';
+import { SupportedLanguage } from '~/routes';
 
 // set to true to enable server-side i18next debug logging
 // ex: DEBUG_I18N_SERVER=true npm run dev
@@ -29,7 +30,7 @@ export async function createInstance(
   request: Request,
   routeModules: RouteModules,
 ) {
-  const lang = getLang(request);
+  const lang = getLang(new URL(request.url).pathname);
   const namespaces = getNamespaces(routeModules);
   return initInstance(lang, namespaces);
 }
@@ -41,7 +42,7 @@ export async function createInstance(
  * @param namespace - The namespaces to load.
  */
 export async function initInstance(
-  language: Language | undefined,
+  language: SupportedLanguage | undefined,
   namespace: Namespace | undefined,
 ) {
   const i18next = createI18NextInstance();
@@ -56,12 +57,11 @@ export async function initInstance(
         loadPath: i18nLoadPath,
       },
       debug: DEBUG_I18N_SERVER === 'true',
-      defaultNS: false,
+      defaultNS: [],
       fallbackLng: false,
       interpolation: {
         escapeValue: false,
       },
-      keySeparator: false,
       lng: language,
       ns: namespace,
     });
@@ -75,22 +75,12 @@ export async function initInstance(
  * @param language - The language to use.
  * @param namespace - The namespaces to load.
  */
-export async function getFixedT(language: Language, namespace: Namespace) {
+export async function getFixedT(
+  language: SupportedLanguage,
+  namespace: Namespace,
+) {
   const i18next = await initInstance(language, namespace);
   return i18next.getFixedT(language, namespace);
-}
-
-/**
- * Extract the language from the request. Returns `undefined` if the language can't be derived.
- *
- * @param request - The request object.
- * @returns The language.
- */
-export function getLang(request: Request) {
-  const pathname = new URL(request.url).pathname;
-  if (pathname.startsWith('/en')) return 'en';
-  if (pathname.startsWith('/fr')) return 'fr';
-  return undefined;
 }
 
 /**

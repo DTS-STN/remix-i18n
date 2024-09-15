@@ -36,9 +36,8 @@ export async function createInstance(routeModules: RouteModules) {
         loadPath: '/locales/{{ns}}-{{lng}}.json',
       },
       debug: DEBUG_I18N_CLIENT === 'true',
-      defaultNS: false,
+      defaultNS: [],
       fallbackLng: false,
-      keySeparator: false,
       ns: namespaces,
     });
 

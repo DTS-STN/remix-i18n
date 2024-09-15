@@ -10,34 +10,41 @@
  */
 
 import { RouteModules } from '@remix-run/react/dist/routeModules';
-
-/**
- * Supported languages.
- */
-export const languages = ['en', 'fr'] as const;
-export type Language = (typeof languages)[number];
+import { SupportedLanguage, supportedLanguages } from '~/routes';
 
 /**
  * Type guard to check if a given value is a valid Language.
  *
  * @param value - The value to check.
  */
-export function isLanguage(value: unknown): value is Language {
+export function isLanguage(value: unknown): value is SupportedLanguage {
   const isString = value !== null && typeof value === 'string';
-  return isString && (languages as readonly string[]).includes(value);
+  return isString && (supportedLanguages as readonly string[]).includes(value);
 }
 
 /**
  * Returns the alternate language for the given input language.
  * (ie: 'en' → 'fr'; 'fr' → 'en')
  */
-export function getAltLanguage(language: Language) {
+export function getAltLanguage(language: SupportedLanguage) {
   switch (language) {
     case 'en':
       return 'fr';
     case 'fr':
       return 'en';
   }
+}
+
+/**
+ * Extract the language from the request. Returns `undefined` if the language can't be derived.
+ *
+ * @param request - The request object.
+ * @returns The language.
+ */
+export function getLang(pathname: string) {
+  if (pathname.startsWith('/en')) return 'en';
+  if (pathname.startsWith('/fr')) return 'fr';
+  return undefined;
 }
 
 /**

@@ -8,16 +8,37 @@ export const meta: MetaFunction = () => {
   return [{ title: 'My Remix App / Mon Application Remix' }];
 };
 
+function Header() {
+  return (
+    <>
+      <header className="bg-white shadow">
+        <div className="container mx-auto px-6 py-3">
+          <div className="flex items-center justify-between">
+            <div className="text-xl font-bold text-gray-800">
+              <img
+                src="/sig-blk-en.svg"
+                alt="Government of Canada"
+                width="283"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
+  );
+}
+
 export default function Index() {
   return (
     <>
+      <Header />
       <section className="bg-white">
         <div className="container mx-auto px-6 py-16 text-center">
           <TypographyH1>Remix i18n demo / Démo Remix i18n</TypographyH1>
           <TypographyP>Pick a language / Choisir un langue</TypographyP>
           <div className="mt-4 flex justify-center space-x-4">
             <AppLink
-              to={{ pathname: '/', search: 'foo=bar' }}
+              routeId="/actors"
               lang="en"
               language="en"
               reloadDocument={true}
@@ -25,7 +46,7 @@ export default function Index() {
               <Button size="lg">English</Button>
             </AppLink>
             <AppLink
-              to={{ pathname: '/', search: 'foo=bar' }}
+              routeId="/actors"
               lang="fr"
               language="fr"
               reloadDocument={true}
