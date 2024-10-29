@@ -5,10 +5,9 @@
  * relevant in a client-side context.
  */
 
-/* eslint-disable import/no-named-as-default-member */
-
-import { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
-import i18next, { LanguageDetectorModule } from 'i18next';
+import type { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
+import type { LanguageDetectorModule } from 'i18next';
+import i18next from 'i18next';
 import I18NextHttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 

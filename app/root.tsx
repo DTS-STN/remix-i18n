@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, SerializeFrom } from '@remix-run/node';
+import type { LoaderFunctionArgs, SerializeFrom } from '@remix-run/node';
 import {
   isRouteErrorResponse,
   Links,
@@ -23,7 +23,7 @@ export const handle = {
   i18nNamespaces: ['common'],
 } satisfies RouteHandle;
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export function loader({ request }: LoaderFunctionArgs) {
   const language = getLanguage(new URL(request.url).pathname);
 
   return {

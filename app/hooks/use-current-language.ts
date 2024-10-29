@@ -1,7 +1,7 @@
 import { useLocation } from '@remix-run/react';
 
 import { getLanguage } from '~/modules/i18n';
-import { Language } from '~/routes';
+import type { Language } from '~/routes';
 
 /**
  * Returns the current language based on the pathname.

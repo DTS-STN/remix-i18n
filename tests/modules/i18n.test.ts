@@ -1,5 +1,5 @@
-import { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
-import { RouteModule } from '@remix-run/react/dist/routeModules';
+import type { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
+import type { RouteModule } from '@remix-run/react/dist/routeModules';
 import { describe, expect, it } from 'vitest';
 
 import {

@@ -1,4 +1,4 @@
-import { RouteModule } from '@remix-run/react/dist/routeModules';
+import type { RouteModule } from '@remix-run/react/dist/routeModules';
 import i18next from 'i18next';
 import I18NextHttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
@@ -6,8 +6,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { getI18nNamespaces } from '~/modules/i18n';
 import { createInstance } from '~/modules/i18n.client';
-
-/* eslint-disable import/no-named-as-default-member */
 
 vi.mock('i18next');
 vi.mock('~/modules/i18n');
