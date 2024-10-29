@@ -25,7 +25,7 @@
     "i18next-fs-backend": "^2.3.2",
     "i18next-http-backend": "^2.6.2",
     "isbot": "^5.1.17",
-    "lucide-react": "^0.453.0",
+    "lucide-react": "^0.454.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.1.0",
@@ -47,13 +47,13 @@
     "@vitest/browser": "^2.1.4",
     "@vitest/coverage-v8": "^2.1.4",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^8.10.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "globals": "^15.11.0",
     "jsdom": "^25.0.1",
     "playwright": "^1.48.2",
@@ -64,7 +64,7 @@
     "typescript": "^5.6.3",
     "vite": "^5.4.10",
     "vite-tsconfig-paths": "^5.0.1",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.4"
   },
   "engines": {
     "node": ">=20.0.0"
