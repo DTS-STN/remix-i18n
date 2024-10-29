@@ -8,13 +8,15 @@
  * - Providing a consistent i18n context for server-side rendering
  */
 
-import { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
-import { createInstance as createI18NextInstance, Namespace } from 'i18next';
+import type { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
+import type { Namespace } from 'i18next';
+import { createInstance as createI18NextInstance } from 'i18next';
 import I18NexFsBackend from 'i18next-fs-backend';
 import { resolve } from 'node:path';
 import { initReactI18next } from 'react-i18next';
 
-import { getI18nNamespaces, getLanguage, Language } from '~/modules/i18n';
+import type { Language } from '~/modules/i18n';
+import { getI18nNamespaces, getLanguage } from '~/modules/i18n';
 
 // set to true to enable server-side i18next debug logging
 // ex: DEBUG_I18N_SERVER=true npm run dev

@@ -5,7 +5,7 @@ import {
   useSearchParams,
 } from '@remix-run/react';
 import { render } from '@testing-library/react';
-import { TFunction } from 'i18next';
+import type { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -31,7 +31,7 @@ vi.mock('~/modules/i18n');
 vi.mock('~/modules/utils');
 
 describe('LanguageSwitcher', () => {
-  it('should render the correct link for current language', async () => {
+  it('should render the correct link for current language', () => {
     vi.mocked(useCurrentLanguage).mockReturnValue('en');
     vi.mocked(useCurrentRouteId).mockReturnValue('/');
     vi.mocked(getAltLanguage).mockReturnValue('fr');

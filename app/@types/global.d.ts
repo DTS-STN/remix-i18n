@@ -1,4 +1,4 @@
-import { Namespace } from 'i18next';
+import type { Namespace } from 'i18next';
 
 declare global {
   /**
@@ -20,6 +20,6 @@ declare global {
    * Client-side environment variables accessible through `window.env`.
    */
   interface Window {
-    env: Record<string, string | undefined>;
+    env: Record<string, string | undefined> | undefined;
   }
 }

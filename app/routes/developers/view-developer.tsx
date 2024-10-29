@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json, useLoaderData } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
 

@@ -1,7 +1,8 @@
 import { useMatches } from '@remix-run/react';
 import invariant from 'tiny-invariant';
 
-import { isRouteId, RouteId } from '~/routes';
+import type { RouteId } from '~/routes';
+import { isRouteId } from '~/routes';
 
 /**
  * Returns the id of the current route.

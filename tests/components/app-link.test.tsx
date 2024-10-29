@@ -18,7 +18,7 @@ vi.mock('~/modules/i18n');
 vi.mock('~/modules/utils');
 
 describe('AppLink', () => {
-  it('should render the correct link for current language', async () => {
+  it('should render the correct link for current language', () => {
     vi.mocked(cn).mockReturnValue('flex');
     vi.mocked(useCurrentLanguage).mockReturnValue('fr');
     vi.mocked(useI18nPath).mockReturnValue('/fr/developpeurs/:id');
@@ -59,7 +59,7 @@ describe('AppLink', () => {
     );
   });
 
-  it('should render the correct link for requested language', async () => {
+  it('should render the correct link for requested language', () => {
     vi.mocked(cn).mockReturnValue('flex');
     vi.mocked(useI18nPath).mockReturnValue('/fr/developpeurs/:id');
     vi.mocked(generatePath).mockReturnValue(

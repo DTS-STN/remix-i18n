@@ -1,5 +1,7 @@
 import 'i18next';
 
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+
 declare module 'i18next' {
   /**
    * Enables IntelliSense for i18n keys by defining the

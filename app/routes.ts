@@ -7,7 +7,7 @@
  * build errors.
  */
 
-import { DefineRoutesFunction } from '@remix-run/dev/dist/config/routes';
+import type { DefineRoutesFunction } from '@remix-run/dev/dist/config/routes';
 
 /**
  * All languages supported by the i18n routing.

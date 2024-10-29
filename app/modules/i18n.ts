@@ -9,11 +9,12 @@
  * all contexts.
  */
 
-import { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
-import { Namespace } from 'i18next';
+import type { UNSAFE_RouteModules as RouteModules } from '@remix-run/react';
+import type { Namespace } from 'i18next';
 
 import { isRouteHandle } from '~/modules/utils';
-import { Language, languages } from '~/routes';
+import type { Language } from '~/routes';
+import { languages } from '~/routes';
 
 // re-export the languages from the routes modules
 export { languages, type Language };

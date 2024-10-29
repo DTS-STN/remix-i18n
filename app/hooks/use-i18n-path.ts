@@ -1,6 +1,6 @@
 import invariant from 'tiny-invariant';
 
-import { Language } from '~/modules/i18n';
+import type { Language } from '~/modules/i18n';
 import { findRouteById } from '~/routes';
 
 /**

@@ -1,4 +1,4 @@
-import { RouteModule } from '@remix-run/react/dist/routeModules';
+import type { RouteModule } from '@remix-run/react/dist/routeModules';
 import { createInstance as createI18NextInstance } from 'i18next';
 import I18NexFsBackend from 'i18next-fs-backend';
 import { resolve } from 'node:path';

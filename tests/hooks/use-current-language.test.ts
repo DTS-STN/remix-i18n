@@ -1,4 +1,5 @@
-import { Location, useLocation } from '@remix-run/react';
+import type { Location } from '@remix-run/react';
+import { useLocation } from '@remix-run/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { useCurrentLanguage } from '~/hooks/use-current-language';

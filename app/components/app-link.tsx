@@ -1,13 +1,14 @@
 import * as React from 'react';
 
-import { generatePath, Link, Params, Path } from '@remix-run/react';
+import type { Params, Path } from '@remix-run/react';
+import { generatePath, Link } from '@remix-run/react';
 import invariant from 'tiny-invariant';
 
 import { useCurrentLanguage } from '~/hooks/use-current-language';
 import { useI18nPath } from '~/hooks/use-i18n-path';
-import { Language } from '~/modules/i18n';
+import type { Language } from '~/modules/i18n';
 import { cn } from '~/modules/utils';
-import { PageRouteId } from '~/routes';
+import type { PageRouteId } from '~/routes';
 
 /**
  * The Remix <Link> props.

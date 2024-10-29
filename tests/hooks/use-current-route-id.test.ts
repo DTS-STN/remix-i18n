@@ -1,4 +1,5 @@
-import { UIMatch, useMatches } from '@remix-run/react';
+import type { UIMatch } from '@remix-run/react';
+import { useMatches } from '@remix-run/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { useCurrentRouteId } from '~/hooks/use-current-route-id';
